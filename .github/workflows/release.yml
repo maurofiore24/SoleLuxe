@@ -8,7 +8,6 @@ on:
 jobs:
   build-release:
     runs-on: ubuntu-latest
-    
     permissions:
       contents: write
       
@@ -60,4 +59,4 @@ jobs:
       - name: Output Download URL
         run: |
           echo "✅ Release published successfully!"
-          echo "Download URL: https://github.com/maurofiore24/SoleLuxe/releases/download/${{ steps.tag_version.outputs.version }}/app-release.apk"
+          echo "Download URL: https://github.com/maurofiore24/SoleLuxe/releases/latest/download/app-release.apk"
