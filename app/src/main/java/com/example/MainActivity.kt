@@ -135,7 +135,7 @@ fun getDrawableIdByName(name: String): Int {
     val context = LocalContext.current
     return remember(name) {
         val resId = context.resources.getIdentifier(name, "drawable", context.packageName)
-        if (resId != 0) resId else R.drawable.ic_launcher_foreground
+        if (resId != 0) resId else R.drawable.ic_launcher_background
     }
 }
 
