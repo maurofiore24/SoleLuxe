@@ -87,3 +87,23 @@
 -keepclassmembers class * {
     @retrofit2.http.** <methods>;
 }
+
+# ====================================================================================
+# 7. RESOURCE PRESERVATION FOR DYNAMIC RESOURCE LOADING
+# ====================================================================================
+# Preserve all R resource ID classes to prevent drawable/resource stripping
+-keepclassmembers class **.R$* {
+    public static <fields>;
+}
+
+# Keep all drawable and resource references accessible
+-keep class **.R { *; }
+-keep class **.R$drawable { *; }
+-keep class **.R$raw { *; }
+-keep class **.R$mipmap { *; }
+-keep class **.R$layout { *; }
+-keep class **.R$string { *; }
+-keep class **.R$color { *; }
+-keep class **.R$id { *; }
+-keep class **.R$attr { *; }
+-keep class **.R$style { *; }
