@@ -1,0 +1,29 @@
+{
+  "short_name": "SoleLuxe",
+  "name": "SoleLuxe - Exclusive Interactive Lounge",
+  "description": "Unlock premium creators, real-time secure lounges, and high-performance streaming directly on your device.",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "icon-512-maskable.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    }
+  ],
+  "start_url": "/?pwa=true",
+  "background_color": "#090A0F",
+  "theme_color": "#7C3AED",
+  "display": "standalone",
+  "orientation": "portrait",
+  "categories": ["social", "entertainment"]
+}

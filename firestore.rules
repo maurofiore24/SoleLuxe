@@ -1,0 +1,64 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions for security validation
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isUserSelf(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // 1. Users Profiles
+    match /users/{userId} {
+      allow read: if isAuthenticated();
+      allow write: if isUserSelf(userId);
+    }
+
+    // 2. Creators Profiles (Public catalog)
+    match /creators/{creatorId} {
+      allow read: if true; // Publicly readable for explore screens
+      
+      // Only the creator can modify their registration info (such as payout wallet setup)
+      allow write: if isAuthenticated() && request.auth.uid == creatorId;
+      
+      // Validate write structure for stablecoin addresses to prevent injection
+      allow update: if isAuthenticated() 
+        && request.resource.data.cryptoWalletAddress is string
+        && request.resource.data.subscriptionPriceUSDT is number
+        && request.resource.data.subscriptionPriceUSDT >= 0;
+    }
+
+    // 3. Subscriptions ledger (Active accesses)
+    match /subscriptions/{subscriptionId} {
+      // Users can see their own subscriptions; creators can check active memberships
+      allow read: if isAuthenticated() && (
+        resource.data.userId == request.auth.uid || 
+        resource.data.creatorId == request.auth.uid
+      );
+      
+      // Subscriptions cannot be self-written or faked by clients directly!
+      // They are written securely by cloud workers or on-chain webhook systems after confirming TRC-20 tx matches.
+      allow write: if false; 
+    }
+
+    // 4. Crypto Transactions Pending Verification Queue
+    match /crypto_transactions/{txHash} {
+      // Users can submit payments for validation by backend scanners, and check their status
+      allow read: if isAuthenticated() && (
+        resource.data.userId == request.auth.uid
+      );
+      
+      allow create: if isAuthenticated() 
+        && request.resource.data.userId == request.auth.uid
+        && request.resource.data.txHash == txHash
+        && request.resource.data.amountUSDT is number
+        && request.resource.data.creatorId is string
+        && request.resource.data.status == "PENDING";
+
+      allow update: if false; // Locks historical transactions to prevent client tamper after verification
+    }
+  }
+}

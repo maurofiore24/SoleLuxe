@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoleLuxe - Sovereign Fintech Manifesto</title>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#7C3AED">
+    
+    <!-- Meta tags for high-end mobile experience -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="SoleLuxe">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        display: ['"Space Grotesk"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        dark: {
+                            obsidian: '#050508',
+                            slate: '#0d0e15',
+                            card: 'rgba(255, 255, 255, 0.02)',
+                            border: 'rgba(255, 255, 255, 0.07)'
+                        },
+                        gold: {
+                            light: '#f5e3b5',
+                            premium: '#dfc57b',
+                            dark: '#b2964b',
+                        },
+                        luxe: {
+                            purple: '#7c3aed',
+                            pink: '#ec4899',
+                            emerald: '#10b981',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .ambient-glow {
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.1) 0%, rgba(236, 72, 153, 0.04) 60%, transparent 100%);
+            filter: blur(80px);
+        }
+        .glass-panel {
+            background: rgba(13, 14, 21, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(223, 197, 123, 0.25);
+            transform: translateY(-2px);
+        }
+        @keyframes subtlePulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 0.9; }
+        }
+        .live-dot-pulse {
+            animation: subtlePulse 2s infinite;
+        }
+    </style>
+</head>
+<body class="bg-dark-obsidian text-gray-100 font-sans tracking-wide overflow-x-hidden min-h-screen">
+
+    <!-- Ambient glow backdrops -->
+    <div class="fixed top-0 left-0 w-[500px] h-[500px] ambient-glow pointer-events-none -z-10"></div>
+    <div class="fixed bottom-0 right-0 w-[500px] h-[500px] ambient-glow pointer-events-none -z-10"></div>
+
+    <!-- Frosted Header -->
+    <header class="fixed top-0 left-0 w-full z-50 glass-panel border-b border-white/5 px-6 lg:px-16 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="/landing.html" class="flex items-center gap-3">
+                <span class="flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-tr from-gold-premium to-luxe-purple text-white font-bold text-lg font-display">✦</span>
+                <div class="flex flex-col">
+                    <span class="text-white font-display font-extrabold tracking-tight text-xl">SOLELUXE</span>
+                    <span class="text-gold-premium text-[9px] font-mono font-bold tracking-[0.2em] mt-0.5">SOVEREIGN FINTECH</span>
+                </div>
+            </a>
+            
+            <a href="/landing.html" class="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-white text-xs font-bold tracking-wider uppercase border border-white/10 transition-all active:scale-95">
+                ← Back to Portal
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content Frame -->
+    <main class="pt-32 pb-24 px-6 lg:px-16 max-w-4xl mx-auto">
+        
+        <!-- Manifesto Header -->
+        <div class="text-center mb-16">
+            <!-- Active Status Badge -->
+            <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-luxe-emerald/10 border border-luxe-emerald/30 mb-6 cursor-default">
+                <span class="w-3 h-3 rounded-full bg-luxe-emerald live-dot-pulse relative flex items-center justify-center">
+                    <span class="absolute inset-0 bg-luxe-emerald/80 rounded-full animate-ping"></span>
+                </span>
+                <span class="text-[10px] font-mono tracking-wider text-luxe-emerald font-extrabold uppercase">Sovereign Beta - Operational</span>
+            </div>
+            
+            <h1 class="text-4xl md:text-5xl font-display font-black tracking-tight text-white mb-4">
+                The Sovereign Fintech Manifesto
+            </h1>
+            <p class="text-xs font-mono text-gold-premium uppercase tracking-[0.2em]">SoleLuxe Core Integrity Protocol Documents</p>
+        </div>
+
+        <!-- Manifesto Core Content -->
+        <article class="space-y-12 text-gray-300 leading-relaxed text-sm md:text-base font-light">
+            
+            <!-- Section 1 -->
+            <section class="glass-card rounded-2xl p-8 md:p-10 space-y-4">
+                <div class="flex items-center gap-3 border-b border-white/5 pb-4 mb-4">
+                    <span class="text-gold-premium font-mono font-bold text-lg text-gradient bg-clip-text bg-gradient-to-r from-gold-premium to-luxe-purple">✦ SECTION I</span>
+                    <h2 class="text-xl font-display font-bold text-white">Sovereignty Above Corporate Convenience</h2>
+                </div>
+                <p>
+                    At SoleLuxe, we believe that your digital presence and creative brand is your absolute, non-negotiable sovereign domain. Traditional distribution networks—including corporate app gatekeepers and centralized merchant accounts—demand total compliance with arbitrary guidelines. 
+                </p>
+                <p>
+                    These corporate settings force creators into restrictive boxes, collect intrusive personal diagnostics telemetry, and execute account freezes without explanation or warning. To maintain 100% creator sovereignty, SoleLuxe has taken a deliberate, strategic decision to develop and distribute our financial visual architecture completely outside of traditional gatekept structures.
+                </p>
+            </section>
+
+            <!-- Section 2 -->
+            <section class="glass-card rounded-2xl p-8 md:p-10 space-y-4">
+                <div class="flex items-center gap-3 border-b border-white/5 pb-4 mb-4">
+                    <span class="text-gold-premium font-mono font-bold text-lg text-gradient bg-clip-text bg-gradient-to-r from-gold-premium to-luxe-purple">✦ SECTION II</span>
+                    <h2 class="text-xl font-display font-bold text-white">The Privacy Equation: Rejecting the Play Store</h2>
+                </div>
+                <p>
+                    The Google Play Store policies strictly limit and forbid applications from deploying robust, device-level screenshot and screen-recording blockades, which they claim restrict system-level usability. 
+                </p>
+                <p>
+                    For visual content creators who monetize specialized, exclusive high-definition aesthetics (including fashion model lookbooks and face-free foot/leg elegance), screen grabs are a form of financial theft. Sideloading SoleLuxe as an independent standalone package enables the complete integration of **FLAG_SECURE encapsulation**. 
+                </p>
+                <p>
+                    This hardware-backed security protocol rendering engine completely blocks screenshot tools, system screen-recorders, and screen-mirror hijack tools. We prioritize your absolute financial safety and physical privacy over standard corporate app store visibility.
+                </p>
+            </section>
+
+            <!-- Section 3 -->
+            <section class="glass-card rounded-2xl p-8 md:p-10 space-y-4">
+                <div class="flex items-center gap-3 border-b border-white/5 pb-4 mb-4">
+                    <span class="text-gold-premium font-mono font-bold text-lg text-gradient bg-clip-text bg-gradient-to-r from-gold-premium to-luxe-purple">✦ SECTION III</span>
+                    <h2 class="text-xl font-display font-bold text-white">Real 80/20 Payout Autonomy</h2>
+                </div>
+                <p>
+                    Conventional credit card processors and subscription sites leech upwards of 30% to 50% of your raw income, claiming maintenance and security overheads. Worse, they hold your hard-earned funds in custody for weeks at a time.
+                </p>
+                <p>
+                    By building our transaction layer on-chain via the high-speed **TRON TRC-20 protocol**, we eliminate middleman custody blocks completely. Subscriptions are routed instantly: exactly **80% clears directly into the creator's decentralized wallet**, and **20% settles into the secure platform vault** to power server relays and verification nodes. All mathematics are verifiable publicly on-chain—with zero delays and zero possibility of account seizure.
+                </p>
+            </section>
+
+            <!-- Section 4: Detailed Interactive Roadmap -->
+            <section class="glass-panel rounded-2xl p-8 md:p-10 border border-white/5 space-y-8">
+                <div class="text-center md:text-left">
+                    <h2 class="text-2xl font-display font-black text-white">Sovereign Architecture Roadmap</h2>
+                    <p class="text-xs text-gray-400 mt-1">Our chronological steps towards complete visual monetization decentralization</p>
+                </div>
+
+                <div class="space-y-6 relative border-l border-white/10 pl-6 ml-2">
+                    <!-- Phase 1 -->
+                    <div class="relative">
+                        <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-gradient-to-tr from-gold-premium to-gold-dark border-4 border-dark-obsidian"></span>
+                        <div class="space-y-1">
+                            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-gold-premium/15 text-gold-premium font-bold">Phase 1: Operational (Active)</span>
+                            <h3 class="text-sm font-bold text-white mt-1">On-Chain Ledger Split Verification</h3>
+                            <p class="text-xs text-gray-400 leading-relaxed">
+                                Implementation of regex-checked on-chain address verifications and a high-availability network queue buffer that auto-handles transient internet disruptions (3G/HSPA drops) to secure subscription deliveries safely.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Phase 2 -->
+                    <div class="relative">
+                        <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-gradient-to-tr from-luxe-purple to-purple-600 border-4 border-dark-obsidian"></span>
+                        <div class="space-y-1">
+                            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-luxe-purple/15 text-luxe-purple font-bold">Phase 2: In Development</span>
+                            <h3 class="text-sm font-bold text-white mt-1">Encrypted Content Hub Backups</h3>
+                            <p class="text-xs text-gray-400 leading-relaxed">
+                                Integrating decentralized file replication systems (IPFS integration) with secure end-to-end encrypted messaging channels that maintain communication metadata secrecy between collectors and artists.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Phase 3 -->
+                    <div class="relative">
+                        <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-gradient-to-tr from-luxe-pink to-pink-600 border-4 border-dark-obsidian"></span>
+                        <div class="space-y-1">
+                            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-luxe-pink/15 text-luxe-pink font-bold">Phase 3: Scheduled Research</span>
+                            <h3 class="text-sm font-bold text-white mt-1">Decentralized Rule Engines</h3>
+                            <p class="text-xs text-gray-400 leading-relaxed">
+                                Deploying self-sovereign smart contracts that let models deploy custom subscription logic, tokenized private room entry rules, and customized multi-signature backup schemes directly onto decentralized ledgers.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </article>
+
+    </main>
+
+    <!-- Simple Page Footer -->
+    <footer class="border-t border-white/5 bg-black/60 py-12 px-6 lg:px-16 text-center text-xs text-gray-500">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-2">
+                <span class="text-gold-premium text-sm">✦</span>
+                <span class="text-white font-display font-extrabold tracking-wider">SOLELUXE SYSTEM</span>
+            </div>
+            <p>&copy; 2026 SoleLuxe Ecosystem. Built to protect creator sovereignty. Strictly peer-to-peer.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
