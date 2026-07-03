@@ -32,8 +32,22 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew
         
+      - name: Generate release keystore
+        run: |
+          keytool -genkey -v -keystore app/my_upload_key.jks \
+            -keyalg RSA -keysize 2048 -validity 10000 \
+            -alias upload \
+            -storepass soleluxe123 \
+            -keypass soleluxe123 \
+            -dname "CN=SoleLuxe, OU=Development, O=SoleLuxe, L=Global, ST=Global, C=US"
+          echo "✅ Keystore generated at app/my_upload_key.jks"
+        
       - name: Build Release APK
         run: ./gradlew assembleRelease
+        env:
+          KEYSTORE_PATH: ${{ github.workspace }}/app/my_upload_key.jks
+          STORE_PASSWORD: soleluxe123
+          KEY_PASSWORD: soleluxe123
         
       - name: Extract version from tag
         id: tag_version
