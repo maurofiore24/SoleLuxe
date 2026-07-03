@@ -22,6 +22,13 @@ jobs:
           distribution: 'temurin'
           cache: gradle
           
+      - name: Generate Gradle wrapper if missing
+        run: |
+          if [ ! -f "./gradlew" ]; then
+            echo "Gradle wrapper not found. Generating..."
+            gradle wrapper --gradle-version 8.5
+          fi
+          
       - name: Make gradlew executable
         run: chmod +x ./gradlew
         
