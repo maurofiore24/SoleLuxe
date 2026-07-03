@@ -133,8 +133,15 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun getDrawableIdByName(name: String): Int {
     val context = LocalContext.current
-    return remember(name) {
-        val resId = context.resources.getIdentifier(name, "drawable", context.packageName)
+    // sanitize input: remove path components and file extensions
+    val safeName = remember(name) {
+        val base = name.substringAfterLast('/')
+        // strip file extension if present (e.g. "pB.jpg" -> "pB")
+        base.substringBeforeLast('.', base)
+            .takeIf { it.isNotBlank() } ?: ""
+    }
+    return remember(safeName) {
+        val resId = if (safeName.isNotEmpty()) context.resources.getIdentifier(safeName, "drawable", context.packageName) else 0
         if (resId != 0) resId else R.drawable.ic_launcher_foreground
     }
 }

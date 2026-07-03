@@ -841,7 +841,10 @@ fun CryptoPaymentScreen(viewModel: MainViewModel) {
 @Composable
 private fun getDrawableIdByName(name: String): Int {
     val context = LocalContext.current
-    val resourceId = context.resources.getIdentifier(name, "drawable", context.packageName)
+    // sanitize input: drop any path parts and extensions (e.g. "res/pB.jpg" -> "pB")
+    val base = name.substringAfterLast('/')
+    val safeName = base.substringBeforeLast('.', base).takeIf { it.isNotBlank() } ?: ""
+    val resourceId = if (safeName.isNotEmpty()) context.resources.getIdentifier(safeName, "drawable", context.packageName) else 0
     return if (resourceId != 0) resourceId else android.R.drawable.ic_menu_gallery
 }
 
