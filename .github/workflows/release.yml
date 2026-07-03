@@ -25,8 +25,8 @@ jobs:
       - name: Generate Gradle wrapper if missing
         run: |
           if [ ! -f "./gradlew" ]; then
-            echo "Gradle wrapper not found. Generating..."
-            gradle wrapper --gradle-version 8.5
+            echo "Gradle wrapper not found. Generating with version 9.3.1..."
+            gradle wrapper --gradle-version 9.3.1
           fi
           
       - name: Make gradlew executable
