@@ -135,7 +135,7 @@ fun getDrawableIdByName(name: String): Int {
     val context = LocalContext.current
     return remember(name) {
         val resId = context.resources.getIdentifier(name, "drawable", context.packageName)
-        if (resId != 0) resId else R.drawable.ic_launcher_background
+        if (resId != 0) resId else R.drawable.ic_launcher_foreground
     }
 }
 
@@ -268,7 +268,16 @@ fun SoleLuxeApp(viewModel: MainViewModel) {
                 },
                 contentWindowInsets = WindowInsets.safeDrawing
             ) { innerPadding ->
-                val backgroundResName = userAccount?.backgroundRes ?: "luxury_trio_bg_v2_1783031169841"
+                val backgroundResName = when (currentRoute) {
+                    "explore", "creator_detail" -> "img_beach_shower_1783035001001"
+                    "messages" -> "img_speedboat_duo_1783035002002"
+                    "lounge" -> "img_dancer_motion_1783035003003"
+                    "studio", "creator_dashboard" -> "img_purple_bg_1782877584581"
+                    "aura_ai" -> "img_model3_anklet_1781222826340"
+                    "crypto_payment" -> "img_model2_pedicure_1781222811962"
+                    "settings", "about", "bookmarks" -> "img_open_toes_pink_1782962118574"
+                    else -> userAccount?.backgroundRes ?: "luxury_trio_bg_v2_1783031169841"
+                }
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
@@ -289,8 +298,8 @@ fun SoleLuxeApp(viewModel: MainViewModel) {
                         alignment = Alignment.Center,
                         modifier = Modifier
                             .fillMaxSize()
-                            .blur(4.dp),
-                        alpha = 0.85f
+                            .blur(1.5.dp),
+                        alpha = 0.98f
                     )
 
                     // Glassmorphic overlay with gradient glows
@@ -2769,7 +2778,7 @@ fun StudioScreen(viewModel: MainViewModel) {
 
 fun Modifier.glassyBackground(): Modifier = this.drawBehind {
     // Elegant Pitch Onyx Black background with translucency to let background image shine through
-    drawRect(Color(0xFF090A0F).copy(alpha = 0.42f))
+    drawRect(Color(0xFF090A0F).copy(alpha = 0.22f))
 
     // Glow blob 1: Top-Left Purple (#7C3AED with 18% opacity, representing a large soft background blur)
     drawCircle(

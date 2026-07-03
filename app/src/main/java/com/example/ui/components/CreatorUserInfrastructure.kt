@@ -759,7 +759,7 @@ fun PremiumDrawerContent(
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .fillMaxSize()
-                .blur(4.dp)
+                .blur(1.5.dp)
         )
         // Premium Dark Gradient overlay to guarantee perfect contrast and readability
         Box(
@@ -768,8 +768,8 @@ fun PremiumDrawerContent(
                 .background(
                     Brush.verticalGradient(
                         colors = listOf(
-                            Color(0xFF0F1017).copy(alpha = 0.45f),
-                            Color(0xFF0B0C10).copy(alpha = 0.55f)
+                            Color(0xFF0F1017).copy(alpha = 0.18f),
+                            Color(0xFF0B0C10).copy(alpha = 0.28f)
                         )
                     )
                 )
