@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoleLuxe - Exclusive Interactive Lounge</title>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#7C3AED">
+    
+    <!-- Meta tags for high-end mobile experience -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="SoleLuxe">
+    
+    <!-- Direct link styling -->
+    <style>
+        :root {
+            --bg-color: #090a0f;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --primary: #8b5cf6;
+            --primary-hover: #7c3aed;
+            --accent: #ec4899;
+            --text-main: #f3f4f6;
+            --text-secondary: #9ca3af;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        @keyframes meshGradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        body {
+            background-color: #090a0f;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            background: linear-gradient(
+                135deg, 
+                #0c0d12 0%,     /* Charcoal */
+                #1e0d30 25%,    /* Deep purple */
+                #111116 50%,    /* Charcoal */
+                #3b122c 75%,    /* Soft pink/plum transition */
+                #0c0d12 100%    /* Charcoal */
+            );
+            background-size: 400% 400%;
+            animation: meshGradient 18s ease-in-out infinite;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(236, 72, 153, 0.06) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 580px;
+            margin: 0 auto;
+            padding: 32px 16px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Branding Header */
+        header {
+            text-align: center;
+            margin-bottom: 24px;
+            width: 100%;
+        }
+
+        .logo-box {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 68px;
+            height: 68px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            box-shadow: 0 0 25px rgba(139, 92, 246, 0.4);
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .logo-box::after {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .crown-icon {
+            font-size: 32px;
+            color: white;
+            line-height: 1;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff 60%, var(--text-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+            max-width: 320px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        /* Anti-commissions Tag */
+        .commission-badge {
+            background: rgba(139, 92, 246, 0.12);
+            color: #c084fc;
+            border: 1.5px solid rgba(139, 92, 246, 0.3);
+            border-radius: 999px;
+            padding: 6px 14px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: inline-block;
+            margin-top: 14px;
+            text-align: center;
+        }
+
+        /* Platform Detection Banner */
+        .detection-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 20px;
+            width: 100%;
+            margin-bottom: 20px;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .detection-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .detection-title {
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .live-pulse {
+            display: flex;
+            align-items: center;
+            font-size: 10px;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .pulse-dot {
+            width: 7px;
+            height: 7px;
+            background-color: #10b981;
+            border-radius: 50%;
+            margin-right: 6px;
+            animation: pulse-kf 1.5s infinite;
+        }
+
+        @keyframes pulse-kf {
+            0% { transform: scale(0.9); opacity: 0.6; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(0.9); opacity: 0.6; }
+        }
+
+        .detected-os-text {
+            font-size: 18px;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Action Buttons */
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            cursor: pointer;
+            border: none;
+            box-sizing: border-box;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+            color: white;
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(124, 58, 237, 0.6);
+        }
+
+        .btn-accent {
+            background: linear-gradient(135deg, var(--accent), #db2777);
+            color: white;
+            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
+        }
+
+        .btn-accent:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(236, 72, 153, 0.6);
+        }
+
+        .btn-outline {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        .btn-secondary {
+            background: #ffffff;
+            color: #000;
+        }
+
+        .btn-secondary:hover {
+            background: #f3f4f6;
+            transform: translateY(-1px);
+        }
+
+        /* Step-by-Step guides styled like native Android components */
+        .walkthrough {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: 100%;
+            margin-top: 16px;
+        }
+
+        .walkthrough-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 4px;
+        }
+
+        .step-item {
+            background: rgba(255,255,255,0.015);
+            border: 1.5px solid rgba(255,255,255,0.04);
+            border-radius: 12px;
+            padding: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .step-item.active {
+            border-color: rgba(139, 92, 246, 0.4);
+            background: rgba(139, 92, 246, 0.03);
+        }
+
+        .step-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .step-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .step-arrow {
+            font-size: 12px;
+            color: var(--text-secondary);
+            transition: transform 0.2s;
+        }
+
+        .step-item.active .step-arrow {
+            transform: rotate(90deg);
+            color: var(--primary);
+        }
+
+        .step-desc {
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-top: 8px;
+            display: none;
+            line-height: 1.5;
+        }
+
+        .step-item.active .step-desc {
+            display: block;
+        }
+
+        /* Tabs Choice alternative */
+        .option-tabs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 4px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            padding: 10px;
+            font-size: 12px;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            color: white;
+            background: var(--primary);
+        }
+
+        /* Matrix lists */
+        .matrix-card {
+            background: rgba(255, 255, 255, 0.015);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 14px;
+            width: 100%;
+            margin-top: 24px;
+            text-align: center;
+        }
+
+        .matrix-title {
+            font-size: 10px;
+            font-weight: 800;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 10px;
+        }
+
+        .matrix-grid {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .matrix-badge {
+            background: rgba(255,255,255,0.03);
+            border-radius: 6px;
+            padding: 4px 10px;
+            font-size: 10px;
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            padding: 24px 16px;
+            font-size: 10px;
+            color: var(--text-secondary);
+            width: 100%;
+            margin-top: auto;
+            border-top: 1px solid rgba(255,255,255,0.03);
+        }
+
+        footer p {
+            margin-bottom: 4px;
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* Hidden blocks */
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- Premium Brand Branding -->
+        <header>
+            <div class="logo-box">
+                <span class="crown-icon">✦</span>
+            </div>
+            <h1>SoleLuxe</h1>
+            <p class="subtitle">Enter the exclusive interactive lounge. High performance native media, real-time chats, and complete creator sovereignty.</p>
+            <div class="commission-badge">0% Store Intermediary Commissions</div>
+        </header>
+
+        <!-- Option Selector (Toggles between APK guide and PWA guide manually if needed) -->
+        <div class="option-tabs">
+            <button id="tab-apk" class="tab-btn active" onclick="switchGuide('apk')">Native App (Android)</button>
+            <button id="tab-pwa" class="tab-btn" onclick="switchGuide('pwa')">Progressive Web (iOS)</button>
+        </div>
+
+        <!-- OS Intelligent Card Gateway -->
+        <div class="detection-card">
+            <div class="detection-header">
+                <span class="detection-title">INTELLIGENT DEVICE DISCOVERY</span>
+                <span class="live-pulse">
+                    <span class="pulse-dot"></span>LIVE DISCOVERY
+                </span>
+            </div>
+            
+            <div id="os-display" class="detected-os-text">
+                📱 Analyzing device characteristics...
+            </div>
+
+            <!-- DYNAMIC BLOCK A: Android APK distribution setup -->
+            <div id="channel-apk" class="gate-content">
+                <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 16px; line-height: 1.5;">
+                    Your device supports our standard premium native container. Installing directly overrides market bans and ensures unfiltered 60 FPS media performance.
+                </p>
+                
+                <!-- Direct APK Download Trigger -->
+                <a href="/soleluxe-release.apk" class="btn btn-primary" id="apk-download-btn">
+                    <span>⬇️ Download Direct Native APK</span>
+                </a>
+                
+                <div class="walkthrough">
+                    <p class="walkthrough-title">RELIABLE SIDELOAD GUIDE:</p>
+                    
+                    <div class="step-item active" onclick="toggleStep(this)">
+                        <div class="step-header">
+                            <span class="step-title">1. Download installer payload</span>
+                            <span class="step-arrow">▶</span>
+                        </div>
+                        <div class="step-desc">
+                            Tap the deep pink button above. Your browser will prompt to save <strong>soleluxe-release.apk</strong>. Confirm download completion.
+                        </div>
+                    </div>
+
+                    <div class="step-item" onclick="toggleStep(this)">
+                        <div class="step-header">
+                            <span class="step-title">2. Enable unknown sources authority</span>
+                            <span class="step-arrow">▶</span>
+                        </div>
+                        <div class="step-desc">
+                            In your Android System settings, open <strong>Apps & Permissions</strong> → Special App Access → <strong>Install Unknown Apps</strong> (or your browser's details) and toggle "Allow from this source".
+                        </div>
+                    </div>
+
+                    <div class="step-item" onclick="toggleStep(this)">
+                        <div class="step-header">
+                            <span class="step-title">3. Start the Native Overlay</span>
+                            <span class="step-arrow">▶</span>
+                        </div>
+                        <div class="step-desc">
+                            Locate the file inside your local downloads drawer and open it. Tap <strong>Install</strong> on the overlay. Enjoy the luxury portal!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DYNAMIC BLOCK B: Apple iOS PWA setup -->
+            <div id="channel-pwa" class="gate-content hidden">
+                <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 16px; line-height: 1.5;">
+                    To bypass Apple App Store constraints, install our fully-responsive Progressive Web App (PWA). It creates an icon on your home screen and operates outside the safari frame.
+                </p>
+
+                <button class="btn btn-accent" id="pwa-install-trigger" style="display: none;">
+                    ✨ Install PWA on Device
+                </button>
+                
+                <div class="walkthrough">
+                    <p class="walkthrough-title">IOS INSTANT ADDITION GUIDE:</p>
+
+                    <div class="step-item active" onclick="toggleStep(this)">
+                        <div class="step-header">
+                            <span class="step-title">1. Tap Safari Action Button</span>
+                            <span class="step-arrow">▶</span>
+                        </div>
+                        <div class="step-desc">
+                            Ensure you are opening this site inside the default <strong>Safari browser</strong>. Tap the share controller action button (it's the square with an upward arrow at the bottom).
+                        </div>
+                    </div>
+
+                    <div class="step-item" onclick="toggleStep(this)">
+                        <div class="step-header">
+                            <span class="step-title">2. Choose 'Add to Home Screen'</span>
+                            <span class="step-arrow">▶</span>
+                        </div>
+                        <div class="step-desc">
+                            Scroll through the list of settings and options and click the item labeled <strong>Add to Home Screen</strong> (or "+" icon).
+                        </div>
+                    </div>
+
+                    <div class="step-item" onclick="toggleStep(this)">
+                        <div class="step-header">
+                            <span class="step-title">3. Launch standalone lounge</span>
+                            <span class="step-arrow">▶</span>
+                        </div>
+                        <div class="step-desc">
+                            Tap "Add" in the top-right corner. The <strong>SoleLuxe</strong> icon is now on your home screen. Open it to access the independent channels.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Direct browser preview option -->
+        <a href="/?pwa=true" class="btn btn-outline" style="width: 100%;">
+            🌐 Launch Instantly in Current Browser
+        </a>
+
+        <!-- System Compatibility matrix -->
+        <div class="matrix-card">
+            <p class="matrix-title">System Compatibility Matrix</p>
+            <div class="matrix-grid">
+                <span class="matrix-badge">Chrome: 100% 🟢</span>
+                <span class="matrix-badge">Safari iOS: 100% 🟢</span>
+                <span class="matrix-badge">Brave: 100% 🟢</span>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 SoleLuxe Interplanetary Ecosystem. All rights reserved.</p>
+            <p>Direct Distribution Node: <a href="/version.json" target="_blank">version.json</a></p>
+        </footer>
+
+    </div>
+
+    <!-- PWA & OS Intelligent logic script -->
+    <script>
+        // PWA Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((reg) => console.log('Successfully bound PWA offline Service Worker:', reg.scope))
+                    .catch((err) => console.log('Service worker binding failed:', err));
+            });
+        }
+
+        // Automatic OS Identification
+        function autoDetectDevice() {
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            const osDisplay = document.getElementById('os-display');
+            
+            if (/android/i.test(userAgent)) {
+                osDisplay.innerHTML = "🤖 Identified Device: <strong>Android (Native APK Available)</strong>";
+                switchGuide('apk');
+            } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                osDisplay.innerHTML = "🍏 Identified Device: <strong>Apple iOS (PWA Required)</strong>";
+                switchGuide('pwa');
+            } else {
+                osDisplay.innerHTML = "💻 Identified Device: <strong>Desktop / Unknown Framework</strong>";
+                switchGuide('apk'); // Default to APK with guide
+            }
+        }
+
+        // OS Choice Switcher
+        function switchGuide(type) {
+            const btnApk = document.getElementById('tab-apk');
+            const btnPwa = document.getElementById('tab-pwa');
+            const sectionApk = document.getElementById('channel-apk');
+            const sectionPwa = document.getElementById('channel-pwa');
+
+            if (type === 'apk') {
+                btnApk.classList.add('active');
+                btnPwa.classList.remove('active');
+                sectionApk.classList.remove('hidden');
+                sectionPwa.classList.add('hidden');
+            } else {
+                btnApk.classList.remove('active');
+                btnPwa.classList.add('active');
+                sectionApk.classList.add('hidden');
+                sectionPwa.classList.remove('hidden');
+            }
+        }
+
+        // Accordion utility
+        function toggleStep(element) {
+            // Collapse others in same walkthrough list
+            const parent = element.parentElement;
+            const siblings = parent.getElementsByClassName('step-item');
+            for(let sib of siblings) {
+                if(sib !== element) {
+                    sib.classList.remove('active');
+                }
+            }
+            element.classList.toggle('active');
+        }
+
+        // Catch PWA deferred installer prompt (Chrome / Android / desktop)
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Prevent Chrome 67 and earlier from automatically showing the prompt
+            e.preventDefault();
+            // Stash the event so it can be triggered later.
+            deferredPrompt = e;
+            // Update UI notify the user they can install the PWA
+            const triggerBtn = document.getElementById('pwa-install-trigger');
+            if (triggerBtn) {
+                triggerBtn.style.display = 'flex';
+                triggerBtn.addEventListener('click', () => {
+                    // Show the prompt
+                    deferredPrompt.prompt();
+                    // Wait for the user to respond to the prompt
+                    deferredPrompt.userChoice.then((choiceResult) => {
+                        if (choiceResult.outcome === 'accepted') {
+                            console.log('User accepted the PWA install credential prompt');
+                        } else {
+                            console.log('User dismissed the PWA prompt');
+                        }
+                        deferredPrompt = null;
+                        triggerBtn.style.display = 'none';
+                    });
+                });
+            }
+        });
+
+        // Run OS check on entrance
+        autoDetectDevice();
+    </script>
+</body>
+</html>
