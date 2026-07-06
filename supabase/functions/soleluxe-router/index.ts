@@ -1,6 +1,6 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 
-const GITHUB_RELEASE_APK_URL = "https://github.com/soleluxe/client-distribution/releases/latest/download/soleluxe_elite_v1.0.4.apk";
+const GITHUB_RELEASE_APK_URL = "https://github.com/maurofiore24/SoleLuxe/raw/master/public/soleluxe-release.apk";
 const FALLBACK_DESKTOP_URL = "https://soleluxe.premium";
 
 const iOS_PWA_HTML = `<!DOCTYPE html><html lang="en"><head>
