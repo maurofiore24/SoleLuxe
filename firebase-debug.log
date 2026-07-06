@@ -1,0 +1,72 @@
+[debug] [2026-07-06T13:47:12.485Z] ----------------------------------------------------------------------
+[debug] [2026-07-06T13:47:12.498Z] Command:       /usr/bin/node-22 /usr/local/bin/firebase deploy --only hosting --project soleluxe-official-app
+[debug] [2026-07-06T13:47:12.500Z] CLI Version:   15.21.0
+[debug] [2026-07-06T13:47:12.501Z] Platform:      linux
+[debug] [2026-07-06T13:47:12.501Z] Node Version:  v22.22.2
+[debug] [2026-07-06T13:47:12.503Z] Detected Agent: unknown
+[debug] [2026-07-06T13:47:12.504Z] Time:          Mon Jul 06 2026 15:47:12 GMT+0200 (Central European Summer Time)
+[debug] [2026-07-06T13:47:12.505Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-07-06T13:47:21.045Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-07-06T13:47:21.048Z] > authorizing via signed-in user (elmaurofiore@gmail.com)
+[debug] [2026-07-06T13:47:21.050Z] [iam] checking project soleluxe-official-app for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2026-07-06T13:47:21.076Z] Checked if tokens are valid: true, expires at: 1783348777103
+[debug] [2026-07-06T13:47:21.077Z] Checked if tokens are valid: true, expires at: 1783348777103
+[debug] [2026-07-06T13:47:21.082Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/soleluxe-official-app:testIamPermissions [none]
+[debug] [2026-07-06T13:47:21.083Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/soleluxe-official-app:testIamPermissions  x-goog-user-project=soleluxe-official-app
+[debug] [2026-07-06T13:47:21.085Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/soleluxe-official-app:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2026-07-06T13:47:23.663Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/soleluxe-official-app:testIamPermissions 400
+[debug] [2026-07-06T13:47:23.664Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/soleluxe-official-app:testIamPermissions {"error":{"code":400,"message":"Project 'projects/soleluxe-official-app' not found or deleted.","status":"INVALID_ARGUMENT","details":[{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"USER_PROJECT_DENIED","domain":"googleapis.com","metadata":{"containerInfo":"projects/soleluxe-official-app","consumer":"projects/soleluxe-official-app","service":"cloudresourcemanager.googleapis.com"}}]}}
+[debug] [2026-07-06T13:47:23.669Z] [iam] error while checking permissions, command may fail: Request to https://cloudresourcemanager.googleapis.com/v1/projects/soleluxe-official-app:testIamPermissions had HTTP Error: 400, Project 'projects/soleluxe-official-app' not found or deleted.
+[debug] [2026-07-06T13:47:23.678Z] Checked if tokens are valid: true, expires at: 1783348777103
+[debug] [2026-07-06T13:47:23.678Z] Checked if tokens are valid: true, expires at: 1783348777103
+[debug] [2026-07-06T13:47:23.686Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/soleluxe-official-app [none]
+[debug] [2026-07-06T13:47:24.387Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/soleluxe-official-app 403
+[debug] [2026-07-06T13:47:24.388Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/soleluxe-official-app {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2026-07-06T13:47:24.392Z] Request to https://firebase.googleapis.com/v1beta1/projects/soleluxe-official-app had HTTP Error: 403, The caller does not have permission
+[debug] [2026-07-06T13:47:24.643Z] FirebaseError: Request to https://firebase.googleapis.com/v1beta1/projects/soleluxe-official-app had HTTP Error: 403, The caller does not have permission
+    at responseToError (/usr/local/lib/node_modules/firebase-tools/lib/responseToError.js:53:12)
+    at RetryOperation._fn (/usr/local/lib/node_modules/firebase-tools/lib/apiv2.js:333:77)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+[error] 
+[error] Error: Failed to get Firebase project soleluxe-official-app. Please make sure the project exists and your account has permission to access it.
+[debug] [2026-07-06T13:48:32.792Z] ----------------------------------------------------------------------
+[debug] [2026-07-06T13:48:32.880Z] Command:       /usr/bin/node-22 /usr/local/bin/firebase projects:create
+[debug] [2026-07-06T13:48:32.882Z] CLI Version:   15.21.0
+[debug] [2026-07-06T13:48:32.883Z] Platform:      linux
+[debug] [2026-07-06T13:48:32.883Z] Node Version:  v22.22.2
+[debug] [2026-07-06T13:48:32.885Z] Detected Agent: unknown
+[debug] [2026-07-06T13:48:32.885Z] Time:          Mon Jul 06 2026 15:48:32 GMT+0200 (Central European Summer Time)
+[debug] [2026-07-06T13:48:32.886Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-07-06T13:48:34.462Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-07-06T13:48:34.464Z] > authorizing via signed-in user (elmaurofiore@gmail.com)
+[debug] [2026-07-06T13:49:06.174Z] Checked if tokens are valid: true, expires at: 1783348777103
+[debug] [2026-07-06T13:49:06.175Z] Checked if tokens are valid: true, expires at: 1783348777103
+[debug] [2026-07-06T13:49:06.190Z] >>> [apiv2][query] POST https://firebase.googleapis.com/v1/projects:checkProjectId [none]
+[debug] [2026-07-06T13:49:06.191Z] >>> [apiv2][body] POST https://firebase.googleapis.com/v1/projects:checkProjectId {"proposedId":"soleluxe-official-app"}
+[debug] [2026-07-06T13:49:07.038Z] <<< [apiv2][status] POST https://firebase.googleapis.com/v1/projects:checkProjectId 200
+[debug] [2026-07-06T13:49:07.039Z] <<< [apiv2][body] POST https://firebase.googleapis.com/v1/projects:checkProjectId {"projectIdStatus":"PROJECT_ID_AVAILABLE","suggestedProjectId":"soleluxe-official-app"}
+[debug] [2026-07-06T13:49:17.979Z] Checked if tokens are valid: true, expires at: 1783348777103
+[debug] [2026-07-06T13:49:17.980Z] Checked if tokens are valid: true, expires at: 1783348777103
+[debug] [2026-07-06T13:49:17.981Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects [none]
+[debug] [2026-07-06T13:49:17.982Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects {"projectId":"soleluxe-official-app","name":"SoleLuxe"}
+[debug] [2026-07-06T13:49:19.943Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects 200
+[debug] [2026-07-06T13:49:19.943Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects {"name":"operations/create_project.global.6888893944492725133"}
+[debug] [2026-07-06T13:49:19.948Z] Checked if tokens are valid: true, expires at: 1783348777103
+[debug] [2026-07-06T13:49:19.949Z] Checked if tokens are valid: true, expires at: 1783348777103
+[debug] [2026-07-06T13:49:19.950Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/operations/create_project.global.6888893944492725133 [none]
+[debug] [2026-07-06T13:49:20.749Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/operations/create_project.global.6888893944492725133 200
+[debug] [2026-07-06T13:49:20.759Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/operations/create_project.global.6888893944492725133 {"name":"operations/create_project.global.6888893944492725133","metadata":{"@type":"type.googleapis.com/google.cloudresourcemanager.v1.ProjectCreationStatus","gettable":true,"ready":true},"done":true,"response":{"@type":"type.googleapis.com/google.cloudresourcemanager.v1.Project","projectNumber":"902901725646","projectId":"soleluxe-official-app","lifecycleState":"ACTIVE","name":"SoleLuxe","createTime":"2026-07-06T13:49:19.048Z"}}
+[debug] [2026-07-06T13:49:20.766Z] Checked if tokens are valid: true, expires at: 1783348777103
+[debug] [2026-07-06T13:49:20.767Z] Checked if tokens are valid: true, expires at: 1783348777103
+[debug] [2026-07-06T13:49:20.768Z] >>> [apiv2][query] POST https://firebase.googleapis.com/v1beta1/projects/soleluxe-official-app:addFirebase [none]
+[debug] [2026-07-06T13:49:22.083Z] <<< [apiv2][status] POST https://firebase.googleapis.com/v1beta1/projects/soleluxe-official-app:addFirebase 403
+[debug] [2026-07-06T13:49:22.084Z] <<< [apiv2][body] POST https://firebase.googleapis.com/v1beta1/projects/soleluxe-official-app:addFirebase {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2026-07-06T13:49:22.092Z] Request to https://firebase.googleapis.com/v1beta1/projects/soleluxe-official-app:addFirebase had HTTP Error: 403, The caller does not have permission
+[debug] [2026-07-06T13:49:22.363Z] FirebaseError: Request to https://firebase.googleapis.com/v1beta1/projects/soleluxe-official-app:addFirebase had HTTP Error: 403, The caller does not have permission
+    at responseToError (/usr/local/lib/node_modules/firebase-tools/lib/responseToError.js:53:12)
+    at RetryOperation._fn (/usr/local/lib/node_modules/firebase-tools/lib/apiv2.js:333:77)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+[error] 
+[error] Error: Failed to add Firebase to Google Cloud Platform project. See firebase-debug.log for more info.

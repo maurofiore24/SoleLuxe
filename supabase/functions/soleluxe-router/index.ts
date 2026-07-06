@@ -1,16 +1,9 @@
-// Deno/Supabase Edge Function for SoleLuxe Universal Smart Router
-// Location: supabase/functions/soleluxe-router/index.ts
-
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 
 const GITHUB_RELEASE_APK_URL = "https://github.com/soleluxe/client-distribution/releases/latest/download/soleluxe_elite_v1.0.4.apk";
 const FALLBACK_DESKTOP_URL = "https://soleluxe.premium";
 
-// High-fidelity iOS PWA Installation Portal
-const iOS_PWA_HTML = `
-<!DOCTYPE html>
-<html lang="en">
-<head>
+const iOS_PWA_HTML = `<!DOCTYPE html><html lang="en"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>SoleLuxe VIP Access Portal</title>
@@ -20,82 +13,21 @@ const iOS_PWA_HTML = `
     <meta name="apple-mobile-web-app-title" content="SoleLuxe">
     <link rel="apple-touch-icon" href="/assets/icon-192.png">
     <style>
-        body {
-            background-color: #0C0D12;
-            color: #FFFFFF;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            overflow: hidden;
-            text-align: center;
-        }
-        .container {
-            padding: 24px;
-            max-width: 400px;
-        }
-        .gold-logo {
-            color: #FFFFDF;
-            font-size: 32px;
-            font-weight: 900;
-            letter-spacing: 4px;
-            text-shadow: 0 0 15px rgba(255, 223, 0, 0.4);
-            margin-bottom: 24px;
-        }
-        .title {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            color: #FFFFFF;
-        }
-        .description {
-            font-size: 13px;
-            color: #A0A5B5;
-            line-height: 1.6;
-            margin-bottom: 32px;
-        }
-        .pwa-prompt-overlay {
-            border: 1px solid rgba(255, 223, 0, 0.35);
-            background: linear-gradient(135deg, #13141C 0%, #0C0D12 100%);
-            border-radius: 16px;
-            padding: 18px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        .pwa-instruction-step {
-            display: flex;
-            align-items: center;
-            margin-bottom: 12px;
-            text-align: left;
-            font-size: 13px;
-        }
-        .pwa-icon-badge {
-            width: 28px;
-            height: 28px;
-            background: rgba(255, 223, 0, 0.1);
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 12px;
-            border: 0.5px solid rgba(255, 223, 0, 0.4);
-        }
-        .highlight {
-            color: #FFFFDF;
-            font-weight: bold;
-        }
-    </style>
-</head>
-<body>
+        body { background-color: #0C0D12; color: #FFFFFF; font-family: -apple-system, BlinkMacSystemFont, sans-serif; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center; }
+        .container { padding: 24px; max-width: 400px; }
+        .gold-logo { color: #FFFFDF; font-size: 32px; font-weight: 900; letter-spacing: 4px; text-shadow: 0 0 15px rgba(255, 223, 0, 0.4); margin-bottom: 24px; }
+        .title { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+        .description { font-size: 13px; color: #A0A5B5; line-height: 1.6; margin-bottom: 32px; }
+        .pwa-prompt-overlay { border: 1px solid rgba(255, 223, 0, 0.35); background: linear-gradient(135deg, #13141C 0%, #0C0D12 100%); border-radius: 16px; padding: 18px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .pwa-instruction-step { display: flex; align-items: center; margin-bottom: 12px; text-align: left; font-size: 13px; }
+        .pwa-icon-badge { width: 28px; height: 28px; background: rgba(255, 223, 0, 0.1); border-radius: 6px; display: flex; align-items: center; justify-content: center; margin-right: 12px; border: 0.5px solid rgba(255, 223, 0, 0.4); }
+        .highlight { color: #FFFFDF; font-weight: bold; }
+    </style></head><body>
     <div class="container">
         <div class="gold-logo">SOLELUXE</div>
         <div class="pwa-prompt-overlay">
             <div class="title">INSTALL ELITE CLIENT</div>
-            <div class="description">
-                To unlock full E2EE chat channels and high-fidelity video portfolio previews, please install the SoleLuxe iOS client.
-            </div>
+            <div class="description">To unlock full E2EE chat channels and high-fidelity video portfolio previews, please install the SoleLuxe iOS client.</div>
             <div class="pwa-instruction-step">
                 <div class="pwa-icon-badge"><span style="color:#FFFFDF;font-size:16px;">⎋</span></div>
                 <div>Tap the <span class="highlight">Share</span> button in your Safari menu bar.</div>
@@ -104,94 +36,31 @@ const iOS_PWA_HTML = `
                 <div class="pwa-icon-badge"><span style="color:#FFFFDF;font-size:16px;">＋</span></div>
                 <div>Scroll down and select <span class="highlight">"Add to Home Screen"</span>.</div>
             </div>
-            <div class="pwa-instruction-step" style="margin-bottom: 0;">
-                <div class="pwa-icon-badge"><span style="color:#00FF66;font-size:12px;">✔</span></div>
-                <div>Launch from Home Screen for <span class="highlight">Offline Support & 4K VIP streams</span>.</div>
-            </div>
         </div>
-    </div>
-</body>
-</html>
+    </div></body></html>
 `;
 
-// Responsive Luxury Desktop Landing Page Portal
-const DESKTOP_LANDING_HTML = `
-<!DOCTYPE html>
-<html lang="en">
-<head>
+const DESKTOP_LANDING_HTML = `<!DOCTYPE html><html lang="en"><head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SoleLuxe - Premium High-Fashion Exclusive Portal</title>
     <style>
-        body {
-            background-color: #040508;
-            color: #E2E8F0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
-        }
-        .container {
-            text-align: center;
-            max-width: 650px;
-            padding: 40px;
-            border: 1px solid rgba(255, 223, 0, 0.15);
-            background: linear-gradient(135deg, #090A0F 0%, #040508 100%);
-            border-radius: 24px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-        }
-        h1 {
-            color: #FFFFDF;
-            font-weight: 900;
-            letter-spacing: 6px;
-            font-size: 36px;
-            margin-bottom: 16px;
-            text-shadow: 0 0 20px rgba(255, 223, 0, 0.35);
-        }
-        p {
-            color: #94A3B8;
-            font-size: 16px;
-            line-height: 1.7;
-            margin-bottom: 30px;
-        }
-        .cta-btn {
-            background: linear-gradient(90deg, #FFFFDF 0%, #D4AF37 100%);
-            color: #040508;
-            padding: 14px 32px;
-            border: none;
-            border-radius: 30px;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .cta-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.6);
-        }
-    </style>
-</head>
-<body>
+        body { background-color: #040508; color: #E2E8F0; font-family: -apple-system, sans-serif; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        .container { text-align: center; max-width: 650px; padding: 40px; border: 1px solid rgba(255, 223, 0, 0.15); background: linear-gradient(135deg, #090A0F 0%, #040508 100%); border-radius: 24px; }
+        h1 { color: #FFFFDF; font-weight: 900; letter-spacing: 6px; font-size: 36px; text-shadow: 0 0 20px rgba(255, 223, 0, 0.35); }
+        p { color: #94A3B8; font-size: 16px; line-height: 1.7; margin-bottom: 30px; }
+        .cta-btn { background: linear-gradient(90deg, #FFFFDF 0%, #D4AF37 100%); color: #040508; padding: 14px 32px; border: none; border-radius: 30px; font-weight: 700; text-decoration: none; display: inline-block; box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4); }
+    </style></head><body>
     <div class="container">
         <h1>SOLELUXE ELITE</h1>
-        <p>Welcome to the premium footwear, exclusive pedicure modeling, and luxury lifestyle portfolio ecosystem. Access priority creator circles and high-fidelity video streams seamlessly.</p>
+        <p>Welcome to the premium footwear, exclusive pedicure modeling, and luxury lifestyle portfolio ecosystem.</p>
         <a href="${GITHUB_RELEASE_APK_URL}" class="cta-btn">DOWNLOAD APK CLIENT</a>
-    </div>
-</body>
-</html>
+    </div></body></html>
 `;
 
 serve(async (req) => {
     const userAgent = req.headers.get("user-agent") || "";
     const secChUaPlatform = req.headers.get("sec-ch-ua-platform") || "";
     
-    // Explicit dynamic routing helper
     const ua = userAgent.toLowerCase();
     let deviceType = "desktop";
 
@@ -201,13 +70,11 @@ serve(async (req) => {
         deviceType = "ios";
     } else if (
         ua.includes("ipad") ||
-        // Bypassing iPadOS 13+ desktop-mode masquerade
         (ua.includes("macintosh") && (secChUaPlatform === '"iOS"' || req.headers.get("x-requested-with") === "com.apple.mobilesafari"))
     ) {
         deviceType = "ios";
     }
 
-    // Set rigid headers to bypass all proxy/caching layers
     const responseHeaders = new Headers();
     responseHeaders.set("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0");
     responseHeaders.set("Pragma", "no-cache");
@@ -216,26 +83,14 @@ serve(async (req) => {
 
     switch (deviceType) {
         case "android":
-            // Redirect or stream release APK download with direct forcing headers
             responseHeaders.set("Location", GITHUB_RELEASE_APK_URL);
-            return new Response(null, {
-                status: 302, // Temporary Redirect to force direct download stream from release assets
-                headers: responseHeaders,
-            });
-
+            return new Response(null, { status: 302, headers: responseHeaders });
         case "ios":
             responseHeaders.set("Content-Type", "text/html; charset=utf-8");
-            return new Response(iOS_PWA_HTML, {
-                status: 200,
-                headers: responseHeaders,
-            });
-
+            return new Response(iOS_PWA_HTML, { status: 200, headers: responseHeaders });
         case "desktop":
         default:
             responseHeaders.set("Content-Type", "text/html; charset=utf-8");
-            return new Response(DESKTOP_LANDING_HTML, {
-                status: 200,
-                headers: responseHeaders,
-            });
+            return new Response(DESKTOP_LANDING_HTML, { status: 200, headers: responseHeaders });
     }
 });
