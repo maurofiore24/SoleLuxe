@@ -240,6 +240,7 @@ class MainViewModel(val repository: SoleRepository, private val context: Context
     // Current navigation state
     private val _currentRoute = MutableStateFlow("feed")
     val currentRoute: StateFlow<String> = _currentRoute.asStateFlow()
+    private val backStack = mutableListOf<String>()
 
     private val _selectedCreatorId = MutableStateFlow<String?>(null)
     val selectedCreatorId: StateFlow<String?> = _selectedCreatorId.asStateFlow()
@@ -663,11 +664,23 @@ class MainViewModel(val repository: SoleRepository, private val context: Context
         val currentTime = System.currentTimeMillis()
         if (currentTime - lastNavigationTime < 650L) return
         lastNavigationTime = currentTime
+        if (route != _currentRoute.value) {
+            backStack.add(_currentRoute.value)
+        }
         _currentRoute.value = route
         if (route == "explore") {
             simulateExploreLoad()
         } else if (route == "feed") {
             simulateFeedLoad()
+        }
+    }
+
+    fun navigateBack(): Boolean {
+        return if (backStack.isNotEmpty()) {
+            _currentRoute.value = backStack.removeAt(backStack.size - 1)
+            true
+        } else {
+            false
         }
     }
 
@@ -677,6 +690,7 @@ class MainViewModel(val repository: SoleRepository, private val context: Context
         lastNavigationTime = currentTime
         _selectedCreatorId.value = creatorId
         if (creatorId != null) {
+            backStack.add(_currentRoute.value)
             _currentRoute.value = "creator_detail"
             simulateProfileLoad()
         }
@@ -685,6 +699,7 @@ class MainViewModel(val repository: SoleRepository, private val context: Context
     fun selectPost(postId: String?) {
         _selectedPostId.value = postId
         if (postId != null) {
+            backStack.add(_currentRoute.value)
             _currentRoute.value = "post_detail"
         }
     }

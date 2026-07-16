@@ -168,15 +168,18 @@ fun SoleLuxeApp(viewModel: MainViewModel) {
     // Double-back-to-exit guard for the root/start screen ("feed").
     // Prevents accidental full app exit on a single system Back press from the home screen.
     var backPressedOnce by remember { mutableStateOf(false) }
-    BackHandler(enabled = currentRoute == "feed") {
-        if (backPressedOnce) {
-            (context as? Activity)?.moveTaskToBack(true)
-        } else {
-            backPressedOnce = true
-            Toast.makeText(context, "Press back again to exit", Toast.LENGTH_SHORT).show()
-            scope.launch {
-                delay(2000)
-                backPressedOnce = false
+    BackHandler(enabled = true) {
+        val handled = viewModel.navigateBack()
+        if (!handled) {
+            if (backPressedOnce) {
+                (context as? Activity)?.moveTaskToBack(true)
+            } else {
+                backPressedOnce = true
+                Toast.makeText(context, "Press back again to exit", Toast.LENGTH_SHORT).show()
+                scope.launch {
+                    delay(2000)
+                    backPressedOnce = false
+                }
             }
         }
     }
