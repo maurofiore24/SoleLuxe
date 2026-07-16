@@ -9,6 +9,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.compose.BackHandler
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.compose.animation.*
@@ -163,6 +164,22 @@ fun SoleLuxeApp(viewModel: MainViewModel) {
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+
+    // Double-back-to-exit guard for the root/start screen ("feed").
+    // Prevents accidental full app exit on a single system Back press from the home screen.
+    var backPressedOnce by remember { mutableStateOf(false) }
+    BackHandler(enabled = currentRoute == "feed") {
+        if (backPressedOnce) {
+            (context as? Activity)?.moveTaskToBack(true)
+        } else {
+            backPressedOnce = true
+            Toast.makeText(context, "Press back again to exit", Toast.LENGTH_SHORT).show()
+            scope.launch {
+                delay(2000)
+                backPressedOnce = false
+            }
+        }
+    }
 
     // Premium custom Insufficient Funds / Refuel dialog
     if (paymentState is PaymentState.Error && (paymentState as PaymentState.Error).errorMessage == "Insufficient Funds") {

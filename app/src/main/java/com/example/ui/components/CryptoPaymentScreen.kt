@@ -722,50 +722,6 @@ fun CryptoPaymentScreen(viewModel: MainViewModel) {
                 }
             }
 
-            // TESTNET / EMULATOR COOP SIMULATOR (Happy Path Bypass for local validation)
-            Button(
-                enabled = !isCheckingPayload,
-                onClick = {
-                    isCheckingPayload = true
-                    coroutineScope.launch {
-                        currentProgressMessage = "🧬 [EMULATOR SIMULATOR ACTIVE]\nFaking blockchain signature proof..."
-                        delay(800)
-                        currentProgressMessage = "Broadcasting simulated transaction to mempool Node #401...\nTotal Price: ${"$"}${String.format("%.2f", rawPrice)} USDT"
-                        delay(1200)
-                        currentProgressMessage = "🔄 RESOLVING ON-CHAIN DEPOSIT SPLIT (80% / 20%):\n" +
-                                "- Creator Split (80%): ${"$"}${String.format("%.2f", creatorPayout)} USDT to dynamic destination: $chosenCreatorAddress\n" +
-                                "- System Fee (20%): ${"$"}${String.format("%.2f", platformCut)} USDT to platform storage: $platformWalletAddress"
-                        delay(1500)
-                        currentProgressMessage = "🧪 STRESS TEST CONCURRENCY GATE:\n" +
-                                "Simulating 50 automated parallel taps on network network toggles ($selectedNetwork) and sync controls.\n" +
-                                "WalletMutex.withLock verified active: wallet address remains uncorrupted to 100% integrity."
-                        delay(1500)
-                        currentProgressMessage = "✅ Success: Ledger entry compiled. Database write finalized and verified!"
-                        delay(1000)
-                        isCheckingPayload = false
-                        viewModel.activateCryptoSubscription(creator.id)
-                        viewModel.navigateTo("creator_detail")
-                    }
-                },
-                colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent, disabledContainerColor = Color.Transparent),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(48.dp)
-                    .clip(RoundedCornerShape(12.dp))
-                    .background(
-                        if (isCheckingPayload) {
-                            Brush.linearGradient(listOf(Color(0xFF8B5CF6).copy(alpha = 0.4f), Color(0xFFEC4899).copy(alpha = 0.4f)))
-                        } else {
-                            Brush.linearGradient(listOf(Color(0xFF8B5CF6), Color(0xFFEC4899)))
-                        }
-                    )
-            ) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Icon(imageVector = Icons.Default.CheckCircle, contentDescription = "Simulate Pay", tint = if (isCheckingPayload) Color.White.copy(alpha = 0.4f) else Color.White)
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text("Simulate Successful Receipt (Free)", color = if (isCheckingPayload) Color.White.copy(alpha = 0.4f) else Color.White, fontWeight = FontWeight.ExtraBold)
-                }
-            }
 
             // Scenario 3 & Scenario 1: Real-time network retry status & Fortress-Mode Active badge
             Row(
